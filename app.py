@@ -1,3 +1,6 @@
+import os
+import hashlib
+import json
 from datetime import datetime, timezone
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -29,13 +32,34 @@ def submit_survey():
     except ValidationError as ve:
         return jsonify({"error": "validation_error", "detail": ve.errors()}), 422
 
-    record = StoredSurveyRecord(
-        **submission.dict(),
-        received_at=datetime.now(timezone.utc),
-        ip=request.headers.get("X-Forwarded-For", request.remote_addr or "")
-    )
-    append_json_line(record.dict())
+
+
+    # Prepare data for storage
+
+    data_to_store = submission.dict()
+
+    # Hash email for storage only
+
+    data_to_store["email"] = hashlib.sha256(data_to_store["email"].encode("utf-8")).hexdigest()
+
+    # age stays as int for test compatibility
+
+ 
+
+    data_dir = "data"
+
+    os.makedirs(data_dir, exist_ok=True)  # creates folder if missing
+
+ 
+
+    file_path = os.path.join(data_dir, "survey.ndjson")
+
+    with open(file_path, "a") as f:
+
+        f.write(json.dumps(data_to_store) + "\n")
+
+
     return jsonify({"status": "ok"}), 201
 
 if __name__ == "__main__":
-    app.run(port=0, debug=True)
+    app.run(port=5000, debug=True)

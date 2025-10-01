@@ -1,0 +1,3 @@
+{"name": "Yahya Naeem", "email": "johndoe@gmail.com", "age": 18, "consent": true, "rating": 4, "comments": "i love systems mane", "received_at": "2025-10-01T20:49:50.435727+00:00", "ip": "172.25.190.76"}
+{"name": "John B", "email": "JohnB33@gmail.com", "age": 50, "consent": true, "rating": 5, "comments": "im john b", "user_agent": null, "submission_id": null, "received_at": "2025-10-01T20:57:41.186341+00:00", "ip": "172.25.190.76"}
+{"name": "Ava", "email": "3c1be12adaf645e5e7e2d2dd13f9c38328526d457adad7a5647c82c10aec69cb", "user_agent": null, "age": 22, "consent": true, "rating": 4, "comments": null, "submission_id": null}
